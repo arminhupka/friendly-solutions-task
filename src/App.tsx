@@ -1,26 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { ReactElement } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Table from './components/Table/Table';
+import useFakeData from './hooks/useFakeData';
+
+const App = (): ReactElement => {
+  const { data, loading } = useFakeData();
+
+  if (loading) {
+    return <h1>Loading</h1>;
+  }
+
+  return <div>{!loading && data && <Table data={data} />}</div>;
+};
 
 export default App;
